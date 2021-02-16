@@ -19,3 +19,6 @@ done
 
 # If you have any script to load the data make sure that its part of this bash script.
 
+ mongoimport --host buildout-qa-shard-00-02.ctmqn.mongodb.net:27017 --ssl -u admin -p 'admin' --authenticationDatabase admin  --db quiz1 --collection myData  --file initial_data_load.json --jsonArray
+ 
+ echo "data loaded into mongo atlas"
