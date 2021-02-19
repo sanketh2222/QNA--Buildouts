@@ -2,20 +2,21 @@ package com.crio.quiz.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
+// import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+// import org.springframework.web.bind.annotation.RequestMapping;
+// import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.crio.quiz.dto.Questions;
 import com.crio.quiz.exchange.GetQuestResponse;
 import com.crio.quiz.exchange.GetQuestRequest;
-import com.crio.quiz.repositoryservices.QRepoServiceImpl;
+import com.crio.quiz.service.QuestionService;
+// import com.crio.quiz.service.QuestionServiceImpl;
 
-import lombok.extern.log4j.Log4j2;
+// import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -24,13 +25,13 @@ import java.util.List;
 
 @RestController
 @Slf4j
-@Log4j2
+// @Log4j2
 // @RequestMapping(QController.QUIZ_API_ENDPOINT)
 public class QController {
     public static final String QUIZ_API_ENDPOINT = "quiz/{moduleid}";
 
     @Autowired
-    private QRepoServiceImpl qRepoServiceImpl;
+    private QuestionService questionService;
 
     // private
 
@@ -48,7 +49,7 @@ public class QController {
         GetQuestResponse resp = new GetQuestResponse();
         // resp.setQuestions(qRepoImpl.getdata());
         System.out.println(resp);
-        resp.setQuestions(qRepoServiceImpl.getmaskdata());
+        resp.setQuestions(questionService.getmaskdata());
         return ResponseEntity.ok().body(resp);
     }
 
@@ -57,7 +58,7 @@ public class QController {
         List<Questions> answer =  new ArrayList<>();
         // log.info("question id is "+ " "+ userResponse.getQuestionId());
         log.info("user response is "+ " "+userResponse.getResponses());
-        GetQuestResponse response = qRepoServiceImpl.validate(userResponse);
+        GetQuestResponse response = questionService.validate(userResponse);
         log.info("result is "+ answer);
         // GetQuestResponse response = new GetQuestResponse();
         // response.setQuestions(answer);

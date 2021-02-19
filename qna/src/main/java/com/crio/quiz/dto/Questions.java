@@ -1,7 +1,7 @@
 package com.crio.quiz.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+// import lombok.AllArgsConstructor;
+// import lombok.Builder;
 import lombok.Data;
 // import lombok.Setter;
 import lombok.NoArgsConstructor;

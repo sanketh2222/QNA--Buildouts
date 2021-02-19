@@ -3,10 +3,10 @@ package com.crio.quiz.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+// import java.util.ArrayList;
+// import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+// import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
