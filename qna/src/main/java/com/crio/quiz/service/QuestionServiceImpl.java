@@ -12,7 +12,7 @@ import com.crio.quiz.dto.MaskQuestion;
 import com.crio.quiz.dto.Questions;
 import com.crio.quiz.dto.Summary;
 import com.crio.quiz.dto.UserResponse;
-import com.crio.quiz.exchange.GetQuestRequest;
+import com.crio.quiz.exchange.GetUserResp;
 import com.crio.quiz.exchange.GetQuestResponse;
 import com.crio.quiz.models.MaskQuestionEntity;
 import com.crio.quiz.models.QuestionEntity;
@@ -57,24 +57,24 @@ public class QuestionServiceImpl implements QuestionService  {
     }
 
     public List<Questions> getmaskdata() {
-        List<MaskQuestionEntity> results = maskedRepository.findAll();
-        // List<MaskQuestion> questions = new ArrayList<>();
-        ModelMapper mapper = modelMapperProvider.get();
-        List<Questions> questions = new ArrayList<>();
-        System.out.println(results.get(0).getQuestions());
-        for (QuestionEntity q : results.get(0).getQuestions()) {
-            questions.add(mapper.map(q, Questions.class));
-        }
-        // for (MaskQuestionEntity mask: results.get(0)) {
-        //     questions.add(mapper.map(mask, MaskQuestion.class));
-
+        // List<MaskQuestionEntity> results = maskedRepository.findAll();
+        // // List<MaskQuestion> questions = new ArrayList<>();
+        // ModelMapper mapper = modelMapperProvider.get();
+        // List<Questions> questions = new ArrayList<>();
+        // System.out.println(results.get(0).getQuestions());
+        // for (QuestionEntity q : results.get(0).getQuestions()) {
+        //     questions.add(mapper.map(q, Questions.class));
         // }
-        // System.out.println(qe);
+        // // for (MaskQuestionEntity mask: results.get(0)) {
+        // //     questions.add(mapper.map(mask, MaskQuestion.class));
+
+        // // }
+        // // System.out.println(qe);
         return qRepoImpl.getmaskeQuestions();
         
     }
 
-    public GetQuestResponse validate(GetQuestRequest userResponses) {
+    public GetQuestResponse validate(GetUserResp userResponses) {
     //    List<QuestionEntity> results = qRepository.findAll();
        questions.clear();
        int score=0;
@@ -98,7 +98,7 @@ public class QuestionServiceImpl implements QuestionService  {
                     ques.get(i).setAnswerCorrect(true);
                     score++;
             }
-            if (ques.get(i).getOptions().size() == 0)  {
+            if (ques.get(i).getType().equals("subjective"))  {
                 System.out.println("question id having null option is "+ ques.get(i).getQuestionId());
                 System.out.println("option is "+ques.get(i).getOptions());
                 ques.get(i).setOptions(null);

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.crio.quiz.dto.Questions;
 import com.crio.quiz.exchange.GetQuestResponse;
-import com.crio.quiz.exchange.GetQuestRequest;
+import com.crio.quiz.exchange.GetUserResp;
 import com.crio.quiz.service.QuestionService;
 // import com.crio.quiz.service.QuestionServiceImpl;
 
@@ -54,7 +54,7 @@ public class QController {
     }
 
     @PostMapping(path = QUIZ_API_ENDPOINT, consumes = "application/json", produces = "application/json")
-    public ResponseEntity<GetQuestResponse> addMember(@RequestBody GetQuestRequest userResponse) {
+    public ResponseEntity<GetQuestResponse> addMember(@RequestBody GetUserResp userResponse) {
         List<Questions> answer =  new ArrayList<>();
         // log.info("question id is "+ " "+ userResponse.getQuestionId());
         log.info("user response is "+ " "+userResponse.getResponses());
