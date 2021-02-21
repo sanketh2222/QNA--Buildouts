@@ -2,7 +2,7 @@
 <pmd xmlns="http://pmd.sourceforge.net/report/2.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd"
-    version="6.10.0" timestamp="2021-02-21T21:52:04.827">
+    version="6.10.0" timestamp="2021-02-21T22:01:48.212">
 <file name="C:\Users\lenova\Desktop\Vscode Proj\Experimental Jars\sankeths94-me_buildout_qa\qna\src\main\java\com\crio\quiz\controller\QController.java">
 <violation beginline="34" endline="34" begincolumn="29" endcolumn="43" rule="BeanMembersShouldSerialize" ruleset="Error Prone" package="com.crio.quiz.controller" class="QController" variable="questionService" externalInfoUrl="https://pmd.github.io/pmd-6.10.0/pmd_rules_java_errorprone.html#beanmembersshouldserialize" priority="3">
 Found non-transient, non-static member. Please mark as transient or provide accessors.
