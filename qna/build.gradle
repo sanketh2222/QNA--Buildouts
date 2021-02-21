@@ -22,10 +22,41 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+apply plugin: 'application'
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.crio.quiz.App'
+    }
+}
 
 repositories {
     mavenCentral()
 }
+
+ test {
+        reports {
+            junitXml.enabled = true
+            def destinationDirectory = System.getProperty("user.home") + "/.gradle/daemon/${buildId}/test-results"
+            junitXml.destination = file(destinationDirectory)
+            html.enabled = true
+        }
+        useJUnitPlatform {
+        }
+        testLogging.events ("STANDARD_ERROR")
+        testLogging.events ("STANDARD_OUT")
+        afterSuite { desc, result ->
+            if (!desc.parent) {
+                println "\nTEST RESULT: ${result.resultType}"
+                println "TEST SUMMARY: RAN ${result.testCount} TESTS, " +
+                        "${result.successfulTestCount} SUCCEEDED, " +
+                        "${result.failedTestCount} FAILED, " +
+                        "${result.skippedTestCount} SKIPPED"
+            }
+        }
+        timeout = Duration.ofMinutes(15)
+    }
 
 jar {
     archiveBaseName = "qeatsbackend"
@@ -94,3 +125,5 @@ configurations {
         exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
     }
 }
+
+compileJava.dependsOn clean

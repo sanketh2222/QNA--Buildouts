@@ -33,19 +33,12 @@ public class QController {
     @Autowired
     private QuestionService questionService;
 
-    // private
-
 
 
     @GetMapping(QUIZ_API_ENDPOINT)
     public ResponseEntity<GetQuestResponse> getQuestions(@PathVariable String moduleid) {
         // Questions q = new Questions();
-        
-        // // q.setQuestionid("001");
-        // q.setTitle("What is the default IP address of localhost?");
-        // System.out.println("called with module id as " + moduleid);
-        // log.info("returning a response with module id as " + moduleid);
-        
+
         GetQuestResponse resp = new GetQuestResponse();
         // resp.setQuestions(qRepoImpl.getdata());
         System.out.println(resp);
@@ -60,9 +53,8 @@ public class QController {
         log.info("user response is "+ " "+userResponse.getResponses());
         GetQuestResponse response = questionService.validate(userResponse);
         log.info("result is "+ answer);
-        // GetQuestResponse response = new GetQuestResponse();
-        // response.setQuestions(answer);
+  
         return ResponseEntity.ok().body(response);
-        // return null;
+
     }
 }

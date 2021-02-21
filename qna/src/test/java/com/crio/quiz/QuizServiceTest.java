@@ -11,14 +11,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-import  com.crio.quiz.dto.*;
-
 import com.crio.quiz.dto.Questions;
-import com.crio.quiz.exchange.*;
-// import com.crio.quiz.models.Questions;
-import com.crio.quiz.repository.QuestionRepository;
-import com.crio.quiz.repositoryServices.QRepoImpl;
-import com.crio.quiz.service.QuestionService;
+import com.crio.quiz.exchange.GetQuestResponse;
+import com.crio.quiz.exchange.GetUserResp;
+import com.crio.quiz.repositoryServices.QRepoServiceImpl;
 import com.crio.quiz.service.QuestionServiceImpl;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -27,13 +23,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
-import javax.inject.Provider;
+// import org.springframework.test.context.ActiveProfiles;
+// import javax.inject.Provider;
 
 @SpringBootTest(classes = { App.class })
 // @MockitoSettings(strictness = Strictness.STRICT_STUBS)
@@ -48,10 +41,8 @@ public class QuizServiceTest {
     QuestionServiceImpl questionService;
 
     @Mock
-    QRepoImpl questionRepositoryMock;
+    QRepoServiceImpl questionRepositoryMock;
 
-    @Autowired
-    private Provider<ModelMapper> modelMapperProvider;
 
     private String resolveFileAsString(String input) throws URISyntaxException, IOException {
         File inputFile = new File(Thread.currentThread().getContextClassLoader().getResource(input).toURI());
@@ -72,23 +63,16 @@ public class QuizServiceTest {
         }
 
         return questionsResponse;
-        // System.out.println(questions);
         
     }
 
     public GetUserResp userResponses(String filename)
             throws JsonParseException, JsonMappingException, IOException, URISyntaxException {
         
-        List<UserResponse> responses = new ArrayList<>();
         ObjectMapper mapper = new ObjectMapper();
         GetUserResp userResponses = mapper
             .readValue(resolveFileAsString(FIXTURES + filename), GetUserResp.class);
-        // for (UserResponse response: userResponses) {
-        //     responses.add(response);
-        // }
-        // GetQuestRequest request = new GetQuestRequest(responses);
-
-        // System.out.println("checking");
+     
         
         return userResponses;
     }
@@ -97,10 +81,8 @@ public class QuizServiceTest {
     public void getRequestTest() throws JsonParseException, JsonMappingException, 
             IOException, URISyntaxException {
         
-        // assertEquals(1, 1);
         String filename = "initial_data_load.json";
         when(questionRepositoryMock.getQuestions()).thenReturn(loadData(filename));
-        // ModelMapper modelMapper = modelMapperProvider.get();
         List<Questions> q = questionService.getdata();
         System.out.println("success");
         assertEquals(12, q.size());
@@ -110,8 +92,6 @@ public class QuizServiceTest {
     public void postRequestTest() throws JsonParseException, JsonMappingException, 
             IOException, URISyntaxException {
         
-        // assertEquals(1, 1);
-        // GetQuestRequest userResponses =
         GetUserResp req = userResponses("sample_user_submission_request.json");
         String filename = "initial_data_load.json";
         when(questionRepositoryMock.getQuestions()).thenReturn(loadData(filename));
