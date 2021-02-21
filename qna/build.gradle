@@ -126,4 +126,4 @@ configurations {
     }
 }
 
-compileJava.dependsOn clean
+// compileJava.dependsOn clean
